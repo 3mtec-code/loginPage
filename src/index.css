@@ -3,14 +3,31 @@
   --card:#ffffff;
   --accent:#2563eb;
   --muted:#6b7280;
+  --text:#111827;
+  --text-light:#6b7280;
 }
+
+:root[data-theme="dark"]{
+  --bg:#111827;
+  --card:#1f2937;
+  --accent:#3b82f6;
+  --muted:#9ca3af;
+  --text:#f3f4f6;
+  --text-light:#d1d5db;
+}
+
 *{box-sizing:border-box}
 html,body,#root{height:100%}
 body{
   margin:0;
   font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
   background:linear-gradient(180deg, #eef2ff 0%, var(--bg) 100%);
-  color:#111827;
+  color:var(--text);
+  transition:background-color 0.3s ease, color 0.3s ease;
+}
+
+:root[data-theme="dark"] body{
+  background:linear-gradient(180deg, #0f172a 0%, var(--bg) 100%);
 }
 .login-page{
   min-height:100vh;
@@ -31,7 +48,8 @@ body{
 .subtitle{margin:0 0 18px 0;color:var(--muted);font-size:14px}
 .input-label{display:block;margin-bottom:12px;font-size:13px}
 .input-label span{display:block;margin-bottom:6px;color:var(--muted)}
-.input-label input{width:100%;padding:10px 12px;border:1px solid #e6e7eb;border-radius:8px;font-size:14px}
+.input-label input{width:100%;padding:10px 12px;border:1px solid #e6e7eb;border-radius:8px;font-size:14px;background:var(--card);color:var(--text);transition:background-color 0.3s ease, color 0.3s ease}
+.input-label input::placeholder{color:var(--text-light)}
 .row{display:flex;align-items:center;justify-content:space-between;margin:10px 0}
 .checkbox{font-size:13px;color:var(--muted)}
 .forgot{font-size:13px;color:var(--accent);text-decoration:none}
@@ -39,7 +57,14 @@ body{
 .btn.primary{background:var(--accent);color:#fff;margin-top:6px}
 .divider{margin:14px 0;text-align:center;color:var(--muted);font-size:13px}
 .socials{display:flex;gap:8px}
-.btn.social{flex:1;background:#f3f4f6;border:1px solid #e6e7eb;color:#111}
+.btn.social{flex:1;background:#f3f4f6;border:1px solid #e6e7eb;color:#111;transition:background-color 0.3s ease, color 0.3s ease}
+
+:root[data-theme="dark"] .btn.social{background:#374151;border-color:#4b5563;color:#f3f4f6}
+
+.theme-toggle{position:absolute;top:20px;right:20px;background:none;border:1px solid var(--muted);border-radius:8px;padding:8px 12px;cursor:pointer;font-size:16px;transition:background-color 0.3s ease, border-color 0.3s ease}
+.theme-toggle:hover{background:rgba(0,0,0,0.05)}
+
+:root[data-theme="dark"] .theme-toggle:hover{background:rgba(255,255,255,0.05)}
 .signup{margin-top:14px;font-size:13px;color:var(--muted);text-align:center}
 
 @media (max-width:420px){
