@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { login } from './auth'
 
+export default function Login({ toggleTheme, isDark }) {
 export default function Login({ onLogin }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -24,6 +25,9 @@ export default function Login({ onLogin }) {
 
   return (
     <div className="login-page">
+      <button className="theme-toggle" onClick={toggleTheme} title="Toggle dark mode">
+        {isDark ? '☀️' : '🌙'}
+      </button>
       <form className="login-card" onSubmit={handleSubmit}>
         <h1 className="brand">Welcome Back</h1>
         <p className="subtitle">Sign in to continue</p>
