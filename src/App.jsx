@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Login from './Login'
+import Dashboard from './Dashboard'
+import { getUser, isAuthenticated } from './auth'
 
 export default function App() {
+<<<<<<< HEAD
   const [isDark, setIsDark] = useState(false)
 
   // Initialize theme from localStorage
@@ -29,6 +32,21 @@ export default function App() {
   return (
     <div className="app">
       <Login toggleTheme={toggleTheme} isDark={isDark} />
+=======
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    if (isAuthenticated()) setUser(getUser())
+  }, [])
+
+  return (
+    <div className="app">
+      {user ? (
+        <Dashboard user={user} onLogout={() => setUser(null)} />
+      ) : (
+        <Login onLogin={(u) => setUser(u)} />
+      )}
+>>>>>>> dd70534ecf3dfe73a371b9bb405e1e947acf4b0b
     </div>
   )
 }

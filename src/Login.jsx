@@ -1,14 +1,29 @@
 import React, { useState } from 'react'
+import { login } from './auth'
 
+<<<<<<< HEAD
 export default function Login({ toggleTheme, isDark }) {
+=======
+export default function Login({ onLogin }) {
+>>>>>>> dd70534ecf3dfe73a371b9bb405e1e947acf4b0b
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [remember, setRemember] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // placeholder action
-    alert(`Email: ${email}\nPassword: ${password}\nRemember: ${remember}`)
+    setError(null)
+    setLoading(true)
+    try {
+      const user = await login(email.trim(), password, remember)
+      if (onLogin) onLogin(user)
+    } catch (err) {
+      setError(err.message || 'Login failed')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -54,7 +69,10 @@ export default function Login({ toggleTheme, isDark }) {
           <a className="forgot" href="#">Forgot?</a>
         </div>
 
-        <button className="btn primary" type="submit">Sign in</button>
+        <button className="btn primary" type="submit" disabled={loading}>
+          {loading ? 'Signing in…' : 'Sign in'}
+        </button>
+        {error && <div className="error">{error}</div>}
 
         <div className="divider">or continue with</div>
         <div className="socials">
