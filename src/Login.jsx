@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 import { login } from './auth'
 
-<<<<<<< HEAD
 export default function Login({ toggleTheme, isDark }) {
-=======
 export default function Login({ onLogin }) {
->>>>>>> dd70534ecf3dfe73a371b9bb405e1e947acf4b0b
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [remember, setRemember] = useState(false)
