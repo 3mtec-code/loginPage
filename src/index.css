@@ -29,14 +29,14 @@ body{
 :root[data-theme="dark"] body{
   background:linear-gradient(180deg, #0f172a 0%, var(--bg) 100%);
 }
-.login-page{
+.login-page, .welcome-page{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
   padding:24px;
 }
-.login-card{
+.login-card, .welcome-card{
   width:100%;
   max-width:400px;
   background:var(--card);
@@ -46,6 +46,9 @@ body{
 }
 .brand{margin:0 0 6px 0;font-size:22px}
 .subtitle{margin:0 0 18px 0;color:var(--muted);font-size:14px}
+.welcome-badge{display:inline-block;margin:0 0 10px 0;padding:6px 10px;border-radius:999px;background:rgba(37,99,235,0.12);color:var(--accent);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em}
+.welcome-title{margin:0 0 8px 0;font-size:24px;line-height:1.2}
+.welcome-text{margin:0 0 20px 0;color:var(--muted);font-size:15px;line-height:1.6}
 .input-label{display:block;margin-bottom:12px;font-size:13px}
 .input-label span{display:block;margin-bottom:6px;color:var(--muted)}
 .input-label input{width:100%;padding:10px 12px;border:1px solid #e6e7eb;border-radius:8px;font-size:14px;background:var(--card);color:var(--text);transition:background-color 0.3s ease, color 0.3s ease}

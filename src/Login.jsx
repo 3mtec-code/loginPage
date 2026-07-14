@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { login } from './auth'
 
-export default function Login({ toggleTheme, isDark }) {
-export default function Login({ onLogin }) {
+export default function Login({ onLogin, toggleTheme, isDark }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [remember, setRemember] = useState(false)
@@ -81,4 +80,4 @@ export default function Login({ onLogin }) {
       </form>
     </div>
   )
-}
+}q

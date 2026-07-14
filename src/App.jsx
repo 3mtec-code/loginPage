@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import Welcome from './Welcome'
 import Login from './Login'
 import Dashboard from './Dashboard'
 import { getUser, isAuthenticated } from './auth'
 
 export default function App() {
   const [isDark, setIsDark] = useState(false)
+  const [user, setUser] = useState(null)
+  const [showWelcome, setShowWelcome] = useState(true)
 
-  // Initialize theme from localStorage
+  // 1. የዳርክ ሞድ ምርጫን ከ localStorage ላይ አንብቦ መተግበር
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme')
     if (savedTheme === 'dark') {
@@ -17,6 +20,14 @@ export default function App() {
     }
   }, [])
 
+  // 2. ተጠቃሚው አስቀድሞ Login ማድረጉን ቼክ ማድረግ
+  useEffect(() => {
+    if (isAuthenticated()) {
+      setUser(getUser())
+    }
+  }, [])
+
+  // 3. የዳርክ ሞድ መቀያየሪያ ተግባር (Toggle function)
   const toggleTheme = () => {
     setIsDark(!isDark)
     if (!isDark) {
@@ -30,19 +41,20 @@ export default function App() {
 
   return (
     <div className="app">
-      <Login toggleTheme={toggleTheme} isDark={isDark} />
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    if (isAuthenticated()) setUser(getUser())
-  }, [])
-
-  return (
-    <div className="app">
       {user ? (
         <Dashboard user={user} onLogout={() => setUser(null)} />
+      ) : showWelcome ? (
+        <Welcome
+          onContinue={() => setShowWelcome(false)}
+          toggleTheme={toggleTheme}
+          isDark={isDark}
+        />
       ) : (
-        <Login onLogin={(u) => setUser(u)} />
+        <Login
+          onLogin={(u) => setUser(u)}
+          toggleTheme={toggleTheme}
+          isDark={isDark}
+        />
       )}
     </div>
   )
