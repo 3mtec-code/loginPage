@@ -1,14 +1,25 @@
 import React, { useState } from 'react'
+import { login } from './auth'
 
-export default function Login() {
+export default function Login({ onLogin }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [remember, setRemember] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // placeholder action
-    alert(`Email: ${email}\nPassword: ${password}\nRemember: ${remember}`)
+    setError(null)
+    setLoading(true)
+    try {
+      const user = await login(email.trim(), password, remember)
+      if (onLogin) onLogin(user)
+    } catch (err) {
+      setError(err.message || 'Login failed')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -51,7 +62,10 @@ export default function Login() {
           <a className="forgot" href="#">Forgot?</a>
         </div>
 
-        <button className="btn primary" type="submit">Sign in</button>
+        <button className="btn primary" type="submit" disabled={loading}>
+          {loading ? 'Signing in…' : 'Sign in'}
+        </button>
+        {error && <div className="error">{error}</div>}
 
         <div className="divider">or continue with</div>
         <div className="socials">
