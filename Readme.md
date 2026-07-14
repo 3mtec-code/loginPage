@@ -17,3 +17,10 @@ npm run dev
 ```
 
 Open the URL shown by Vite (usually http://localhost:5173).
+
+Credentials for the mock auth:
+
+- Email: `user@example.com`
+- Password: `password`
+
+The app uses a simple client-side mock auth. Use the credentials above to sign in.
